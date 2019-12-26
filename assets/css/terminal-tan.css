@@ -1,3 +1,4 @@
+/* $color-terminal-light-text: #2a2a2a;  too dark */
 body {
   font-family: "Fira Mono", monospace;
   background-color: #f1f0f1; }
@@ -49,7 +50,7 @@ div.terminal-command {
   padding: 0px;
   overflow: hidden;
   white-space: nowrap;
-  color: gray;
+  color: #0000b2;
   font-size: .8rem; }
 
 div.site-nav {
@@ -82,7 +83,7 @@ div.site-nav {
 div.site-footer {
   padding: 0 16px 16px 16px;
   border-bottom-left-radius: 10px;
-  background-color: #ffb264; }
+  background-color: #dfdbc3; }
   @media (min-width: 1000px) {
     div.site-footer {
       border-bottom-left-radius: 20px; } }
@@ -92,9 +93,9 @@ div.site-footer {
 
 div.site-wrap {
   border-bottom-left-radius: 10px;
-  background-color: #ffb264;
+  background-color: #dfdbc3;
   color: #000;
-  background-color: #ffb264;
+  background-color: #dfdbc3;
   border-bottom: 1px solid #b5abab; }
   @media (min-width: 1000px) {
     div.site-wrap {
@@ -113,17 +114,17 @@ div.site-wrap {
       margin-left: 50px; } }
   div.site-wrap a {
     text-decoration: none;
-    color: red; }
+    color: #900; }
   div.site-wrap a::before {
     content: "[";
-    color: gray; }
+    color: #0000b2; }
   div.site-wrap a::after {
     content: "]";
-    color: gray; }
+    color: #0000b2; }
 
 span.note {
   font-style: italic;
-  color: gray;
+  color: #0000b2;
   display: table;
   padding-left: 20px; }
   @media (min-width: 600px) {
@@ -149,4 +150,4 @@ div#large-resolution-extra {
       /* margin: 30px 0 0 1700px; */
       padding: 20px; } }
 
-/*# sourceMappingURL=terminal-orange.css.map */
+/*# sourceMappingURL=terminal-tan.css.map */

@@ -3,11 +3,7 @@
   $nav_url = preg_replace('/^([\/][^\/]*).*/', "$1", $_SERVER['SCRIPT_URL']);
   $nav_class[$nav_url] = 'current';
 
-  // Each page can specify a different color scheme. Default is orange.
-  $page_colors = array(
-                  '/projects' => 'blue',
-                      );
-  $page_color = $page_colors[$nav_url] ? $page_colors[$nav_url] : 'orange';
+  $page_color = $page_color ? $page_color : 'tan';
 ?>
 <!DOCTYPE html>
 <html lang="en">

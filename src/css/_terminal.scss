@@ -46,7 +46,7 @@ div.site-header
 
 div.site-wrap__top-image
 {
-  background-color: lightgray; /* fallback if image doesn't load */
+  background-color: #e8e8e8; /* for transparent corner */
   background-image: linear-gradient(to right, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.9)), url("/assets/terminal_top.png");
   height: 46px;
   background-size: 714px 46px;
@@ -108,8 +108,19 @@ div.site-nav
   }
 }
 
+/* used by footer and site-wrap: */
+@mixin rounded-bottom-corner {
+  border-bottom-left-radius: 10px;
+  background-color:  $color-terminal-background;
+  @include for-laptop-up {
+    border-bottom-left-radius: 20px;
+  }
+}
+
 div.site-footer
 {
+  padding: 0 16px 16px 16px;
+  @include rounded-bottom-corner;
   p {
     margin: 0;
     padding: 8px 0;
@@ -118,11 +129,16 @@ div.site-footer
 
 div.site-wrap
 {
+  @include rounded-bottom-corner;
   @include for-laptop-up {
     width: 980px;
-    margin-left: 20px;
+    margin-left: 10px;
   }
   @include for-desktop-up {
+    width: 1350px;
+    margin-left: 30px;
+  }
+  @include for-big-desktop-up {
     width: 1427px;
     margin-left: 50px;
   }

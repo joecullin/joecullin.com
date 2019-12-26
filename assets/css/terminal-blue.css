@@ -29,8 +29,8 @@ div.site-header {
     color: #000; }
 
 div.site-wrap__top-image {
-  background-color: lightgray;
-  /* fallback if image doesn't load */
+  background-color: #e8e8e8;
+  /* for transparent corner */
   background-image: linear-gradient(to right, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.9)), url("/assets/terminal_top.png");
   height: 46px;
   background-size: 714px 46px; }
@@ -79,19 +79,36 @@ div.site-nav {
     font-weight: bold;
     font-size: 1.2em; }
 
-div.site-footer p {
-  margin: 0;
-  padding: 8px 0; }
+/* used by footer and site-wrap: */
+div.site-footer {
+  padding: 0 16px 16px 16px;
+  border-bottom-left-radius: 10px;
+  background-color: #224fbc; }
+  @media (min-width: 1000px) {
+    div.site-footer {
+      border-bottom-left-radius: 20px; } }
+  div.site-footer p {
+    margin: 0;
+    padding: 8px 0; }
 
 div.site-wrap {
+  border-bottom-left-radius: 10px;
+  background-color: #224fbc;
   color: #eee;
   background-color: #224fbc;
   border-bottom: 1px solid #b5abab; }
   @media (min-width: 1000px) {
     div.site-wrap {
+      border-bottom-left-radius: 20px; } }
+  @media (min-width: 1000px) {
+    div.site-wrap {
       width: 980px;
-      margin-left: 20px; } }
+      margin-left: 10px; } }
   @media (min-width: 1200px) {
+    div.site-wrap {
+      width: 1350px;
+      margin-left: 30px; } }
+  @media (min-width: 1800px) {
     div.site-wrap {
       width: 1427px;
       margin-left: 50px; } }
