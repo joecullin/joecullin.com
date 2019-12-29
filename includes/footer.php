@@ -2,7 +2,7 @@
 
       <div class="site-footer">
         <p>
-          Got <a href="mailto:ideas@joecullin.com" class="navbar-link">feedback</a>?
+          Contact <a href="mailto:ideas@joecullin.com" class="navbar-link">me</a>!
         </p>
       </div>
 

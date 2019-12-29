@@ -13,8 +13,15 @@ h1 {
 
 h2 {
   font-size: 1rem;
-  font-weight: normal;
+  font-weight: bold;
   text-decoration: underline; }
+
+div.readable {
+  font-family: "Roboto Slab", serif; }
+  div.readable h2 {
+    margin-top: 32px;
+    font-size: 1.2em;
+    text-decoration: none; }
 
 div.site-header {
   margin: 16px;
@@ -148,5 +155,29 @@ div#large-resolution-extra {
       float: right;
       /* margin: 30px 0 0 1700px; */
       padding: 20px; } }
+
+div.resume-job {
+  border-top: 1px solid gray; }
+  @media (min-width: 1000px) {
+    div.resume-job {
+      margin: 0 32px; } }
+
+div.resume-job__header {
+  font-weight: bold; }
+
+@media (min-width: 600px) {
+  div.resume-job__details {
+    margin-left: 32px; } }
+div.resume-job__details ul {
+  padding-left: 20px;
+  margin-block-start: 0; }
+div.resume-job__details li {
+  list-style-type: "* ";
+  padding-top: 0; }
+
+ul.resume-job__bulleted-list li {
+  list-style-type: "\0025AA  ";
+  padding-top: .5em;
+  padding-bottom: .5em; }
 
 /*# sourceMappingURL=terminal-orange.css.map */

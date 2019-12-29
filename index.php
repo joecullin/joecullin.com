@@ -1,6 +1,6 @@
 <?php
   include("../includes/vars.php");
-  $header_terminal_command = "mac dev DIRTY /code/jc.com/src $ cat index.php";
+  $header_terminal_command = "mac dev DIRTY /code/jc.com/src $ cat index.html";
   $page_color = 'orange';
 
   $large_resolution_extra = <<<END_HTML
