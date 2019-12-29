@@ -1,5 +1,12 @@
+
+# force https
 RewriteCond %{HTTPS} !=on
 RewriteRule ^(.*) https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# redirect joecullin.com to www.joecullin.com
+# (but leave x.joecullin.com and y.joecullin.com alone)
+RewriteCond %{HTTP_HOST} ^joecullin.com [NC]
+RewriteRule ^(.*)$ http://www.joecullin.com/$1 [L,R=301,NC]
 
 ErrorDocument 400 /error.html
 ErrorDocument 401 /error.html
