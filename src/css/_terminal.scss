@@ -83,7 +83,7 @@ div.terminal-command
   padding: 0px;
   overflow: hidden;
   white-space: nowrap;
-  color: $color-terminal-light-text;
+  color: $color-terminal-lightest-text;
   font-size: .8rem;
 }
 
@@ -215,7 +215,7 @@ div#large-resolution-extra
 
 div.resume-job
 {
-  border-top: 1px solid $color-terminal-light-text;
+  border-top: 1px solid $color-terminal-lightest-text;
   @include for-laptop-up {
     margin: 0 32px;
   }
