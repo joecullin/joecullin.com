@@ -9,4 +9,8 @@
     </div> <!-- site-wrap -->
 
   </body>
+
+
+  <script><?php echo $footer_js ?></script>
+
 </html>

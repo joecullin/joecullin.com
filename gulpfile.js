@@ -5,7 +5,10 @@ const gulpIf = require("gulp-if");
 const cssnano = require("gulp-cssnano");
 const rename = require("gulp-rename");
 const rsync = require("gulp-rsync");
-const prompt = require("gulp-prompt");
+const concat = require("gulp-concat");
+const babel = require("gulp-babel");
+const uglify = require("gulp-uglify");
+const optimizejs = require("gulp-optimize-js");
 
 let target = "dev";
 const paths = {
@@ -14,6 +17,15 @@ const paths = {
   sass: {
     input: "src/css/**/*.scss",
     output: "dist/assets/css"
+  },
+  js: {
+    input: [
+      "src/js/node_modules/html2canvas/dist/html2canvas.min.js",
+      "src/js/node_modules/disintegrate/disintegrate.js",
+      "src/js/*.js"
+    ],
+    output: "dist/assets/js",
+    filename: "site.min.js"
   },
   copy: {
     input: "src/site/**/*",
@@ -86,6 +98,39 @@ const buildStyles = () => {
     .pipe(gulp.dest(paths.sass.output));
 };
 
+// js files
+
+const buildScripts = () => {
+  const isCustom = path => {
+    return path.dirname.match(/\/src\/js$/);
+  };
+  const isMin = path => {
+    return !path.basename.match(/[.]min[.]js$/);
+  };
+
+  const useBabel = () => {
+    return true;
+  };
+  const useUglify = () => {
+    return true;
+  };
+
+  return gulp
+    .src(paths.js.input)
+    .pipe(gulpIf(isCustom, optimizejs()))
+    .pipe(
+      gulpIf(
+        useBabel,
+        babel({
+          presets: ["env"]
+        })
+      )
+    )
+    .pipe(gulpIf(useUglify, uglify()))
+    .pipe(concat(paths.js.filename))
+    .pipe(gulp.dest(paths.js.output));
+};
+
 // wipe the dist dir clean.
 // (Don't remove the dir: that confuses the dev server and requires docker restart.)
 const cleanDist = done => {
@@ -108,7 +153,10 @@ exports.copy = gulp.series(copyFiles);
 
 // Default when I just run 'gulp'.
 // (Also the basis of watch and deploy commands.)
-exports.default = gulp.series(cleanDist, gulp.parallel(buildStyles, copyFiles));
+exports.default = gulp.series(
+  cleanDist,
+  gulp.parallel(buildStyles, buildScripts, copyFiles)
+);
 
 exports.watch = gulp.series(exports.default, watchSource);
 
