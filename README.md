@@ -5,7 +5,8 @@ Code for the www.joecullin.com site.
 ## Overview
 
 - src/css - sass files
-- src/site - php, images, etc. -- mostly copied as-is into the build.
+- src/js - javascript files
+- src/site - php, images, etc. -- copied as-is into the build.
 - dist - target of build
 - package.json file -- for gulp.
 
