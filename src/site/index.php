@@ -10,12 +10,36 @@ END_HTML;
 
   include("includes/header.php");
 ?>
-          <h1>Welcome to my home on the web.</h1>
+          <div data-dis-container id="explodingDiv"  data-dis-type="self-contained">
+            <h1>Welcome to my home on the web.</h1>
 
-          <p>Please click one of the links above.</p>
+            <p>Please click one of the links above.</p>
 
-          <p>
-            Do <i>not</i> try this <a href="#" onClick="alert('Now you are on the naughty list!!')">link</a> though! 
-          </p>
+            <p>
+              Do <i>not</i> try this <a id="doNotClick" href="#">link</a> though!
+            </p>
+          </div>
 
-<?php include("includes/footer.php"); ?>
+<?php
+
+  $footer_js = <<<END_JS
+    disintegrate.init();
+
+    document.getElementById('doNotClick').addEventListener('click', e => {
+      console.log('clicked button');
+      var targetDiv = document.getElementById('explodingDiv');
+      var disObj = disintegrate.getDisObj(targetDiv);
+      disintegrate.createSimultaneousParticles(disObj);
+
+      var oopsDiv = document.createElement("div");
+      var oopsMessage = document.createTextNode("You just had to try it.");
+      oopsDiv.appendChild(oopsMessage);
+      var parentDiv = targetDiv.parentNode;
+      parentDiv.insertBefore(oopsDiv, targetDiv);
+      targetDiv.remove();
+
+    });
+END_JS;
+
+  include("includes/footer.php");
+?>
