@@ -1,14 +1,19 @@
 const gulp = require("gulp");
 const del = require("del");
+const PluginError = require("plugin-error");
 const sass = require("gulp-sass");
 const gulpIf = require("gulp-if");
 const cssnano = require("gulp-cssnano");
+const filter = require("gulp-filter");
 const rename = require("gulp-rename");
 const rsync = require("gulp-rsync");
 const concat = require("gulp-concat");
 const babel = require("gulp-babel");
 const uglify = require("gulp-uglify");
 const optimizejs = require("gulp-optimize-js");
+const debug = require("gulp-debug");
+const through2 = require("through2");
+const request = require("request");
 
 let target = "dev";
 const paths = {
@@ -30,6 +35,10 @@ const paths = {
   copy: {
     input: "src/site/**/*",
     output: "dist/"
+  },
+  phpToHtml: {
+    // (Uses some "copy" settings.)
+    server: "http://localhost:8077/"
   },
   deploy: {
     source: "dist/**",
@@ -89,17 +98,70 @@ const copyFiles = function(done) {
     .pipe(gulp.dest(paths.copy.output));
 };
 
+// Capture every index.php as an index.html file.
+// I know this is a silly way to generate a static site.
+// I'm just playing around and learning more about gulp.
+//
+const buildStaticHtml = function(done) {
+  const fileFilter = filter(["**/index.php"]);
+
+  return gulp
+    .src(paths.copy.input)
+    .pipe(fileFilter)
+    .pipe(debug({ title: "index.php file:" }))
+
+    .pipe(
+      through2.obj(function(file, _, cb) {
+        if (file.isBuffer()) {
+          // Convert the file path to the dev site url.
+          const url =
+            paths.phpToHtml.server + file.relative.replace(/index.php$/, "");
+
+          // Fetch the page contents.
+          request(url, (error, response, body) => {
+            const statusCode =
+              response && response.statusCode ? response.statusCode : 0;
+            if (statusCode !== 200) {
+              cb(
+                new PluginError(
+                  "buildStaticHtml",
+                  `Error fetching url '${url}' for '${file.relative}': ${error}. (http status=${statusCode})`
+                )
+              );
+            }
+            file.contents = Buffer.from(body);
+            cb(null, file);
+          });
+        } else {
+          cb(
+            new PluginError(
+              "buildStaticHtml",
+              `file is not a buffer? '${file.relative}'`
+            )
+          );
+        }
+      })
+    )
+    .pipe(debug({ title: "converted to index.html file:" }))
+    .pipe(
+      rename(function(path) {
+        path.extname = ".html";
+      })
+    )
+    .pipe(gulp.dest(paths.copy.output));
+};
+
 // css files
 const buildStyles = () => {
   return gulp
     .src(paths.sass.input)
+    .pipe(debug({ title: "sass file:" }))
     .pipe(sass())
     .pipe(gulpIf("*.css", cssnano()))
     .pipe(gulp.dest(paths.sass.output));
 };
 
 // js files
-
 const buildScripts = () => {
   const isCustom = path => {
     return path.dirname.match(/\/src\/js$/);
@@ -117,6 +179,7 @@ const buildScripts = () => {
 
   return gulp
     .src(paths.js.input)
+    .pipe(debug({ title: "js file:" }))
     .pipe(gulpIf(isCustom, optimizejs()))
     .pipe(
       gulpIf(
@@ -155,7 +218,8 @@ exports.copy = gulp.series(copyFiles);
 // (Also the basis of watch and deploy commands.)
 exports.default = gulp.series(
   cleanDist,
-  gulp.parallel(buildStyles, buildScripts, copyFiles)
+  gulp.parallel(buildStyles, buildScripts, copyFiles),
+  buildStaticHtml
 );
 
 exports.watch = gulp.series(exports.default, watchSource);
