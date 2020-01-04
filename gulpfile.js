@@ -15,7 +15,12 @@ const debug = require("gulp-debug");
 const through2 = require("through2");
 const request = require("request");
 
+/******** config/setup ***************/
+
 let target = "dev";
+const settings = {
+  buildStaticHtml: true
+};
 const paths = {
   input: "src",
   output: "dist/*",
@@ -34,11 +39,10 @@ const paths = {
   },
   copy: {
     input: "src/site/**/*",
-    output: "dist/"
-  },
-  phpToHtml: {
-    // (Uses some "copy" settings.)
-    server: "http://localhost:8077/"
+    output: "dist/",
+    buildStaticHtml: {
+      server: "http://localhost:8077/"
+    }
   },
   deploy: {
     source: "dist/**",
@@ -59,9 +63,12 @@ const setProdTarget = done => {
   done();
 };
 
+/******** end config/setup ***********/
+
+// Sync files from dist dir to remote server.
 const deploy = done => {
   if (target === "dev") {
-    console.log("Can't deploy to dev.");
+    console.log("Can't deploy to dev. Just run 'gulp' with no args.");
     done();
     return;
   }
@@ -98,42 +105,47 @@ const copyFiles = function(done) {
     .pipe(gulp.dest(paths.copy.output));
 };
 
-// Capture every index.php as an index.html file.
+// Convert every index.php file to a static index.html.
 // I know this is a silly way to generate a static site.
 // I'm just playing around and learning more about gulp.
-//
 const buildStaticHtml = function(done) {
-  const fileFilter = filter(["**/index.php"]);
+  if (!settings.buildStaticHtml) return done();
 
+  const fileFilter = filter(["**/index.php"]);
   return gulp
     .src(paths.copy.input)
     .pipe(fileFilter)
-    .pipe(debug({ title: "index.php file:" }))
-
+    .pipe(debug({ title: "convert index.php to static html:" }))
     .pipe(
-      through2.obj(function(file, _, cb) {
+      through2.obj(function(file, _, done) {
         if (file.isBuffer()) {
-          // Convert the file path to the dev site url.
+          // Save the php file path. We'll remove it after success.
+          let removeFile = paths.copy.output + file.relative;
+
+          // Convert file path to dev server url.
           const url =
-            paths.phpToHtml.server + file.relative.replace(/index.php$/, "");
+            paths.copy.buildStaticHtml.server +
+            file.relative.replace(/index.php$/, "");
 
           // Fetch the page contents.
           request(url, (error, response, body) => {
-            const statusCode =
-              response && response.statusCode ? response.statusCode : 0;
-            if (statusCode !== 200) {
-              cb(
+            if (response.statusCode !== 200) {
+              done(
                 new PluginError(
                   "buildStaticHtml",
-                  `Error fetching url '${url}' for '${file.relative}': ${error}. (http status=${statusCode})`
+                  `Error fetching url '${url}' for '${file.relative}': ${error}. (http status=${response.statusCode})`
                 )
               );
             }
             file.contents = Buffer.from(body);
-            cb(null, file);
+
+            // remove the php file from the dist dir
+            del.sync([removeFile]);
+
+            done(null, file);
           });
         } else {
-          cb(
+          done(
             new PluginError(
               "buildStaticHtml",
               `file is not a buffer? '${file.relative}'`
@@ -142,7 +154,6 @@ const buildStaticHtml = function(done) {
         }
       })
     )
-    .pipe(debug({ title: "converted to index.html file:" }))
     .pipe(
       rename(function(path) {
         path.extname = ".html";
@@ -210,9 +221,9 @@ const watchSource = function(done) {
   done();
 };
 
-// Isolated functions, for troubleshooting.
+/******** exported functions *********/
+
 exports.clean = gulp.series(cleanDist);
-exports.copy = gulp.series(copyFiles);
 
 // Default when I just run 'gulp'.
 // (Also the basis of watch and deploy commands.)
@@ -221,8 +232,6 @@ exports.default = gulp.series(
   gulp.parallel(buildStyles, buildScripts, copyFiles),
   buildStaticHtml
 );
-
 exports.watch = gulp.series(exports.default, watchSource);
-
 exports.deployTest = gulp.series(setTestTarget, exports.default, deploy);
 exports.deployProduction = gulp.series(setProdTarget, exports.default, deploy);
