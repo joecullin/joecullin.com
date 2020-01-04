@@ -8,7 +8,7 @@
       Picture of me.<br/>
       <picture>
         <source srcset="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 1w" media="(max-width: 2399px)">
-        <img src="https://www.joecullin.com/site/wp-content/uploads/2009/12/joe_cullin_on_the_beach_tall.png" media="(min-width: 2400px)" width="255" align="right"/>
+        <img src="{$base_url}/site/wp-content/uploads/2009/12/joe_cullin_on_the_beach_tall.png" media="(min-width: 2400px)" width="255" align="right"/>
       </picture>
 END_HTML;
 
@@ -22,7 +22,7 @@ END_HTML;
           </p>
           <p>
             This site is mainly a sandbox for trying new code & tools, but once in a while I post some
-            <a href="/site/" target="_blank">content</a> or share one of my <a href="/projects">projects</a>.
+            <a href="<?php echo $base_url ?>/site/" target="_blank">content</a> or share one of my <a href="/projects">projects</a>.
           </p>
 
           <h2>Personal</h2>
