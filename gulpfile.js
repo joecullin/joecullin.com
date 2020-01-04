@@ -1,16 +1,26 @@
 const gulp = require("gulp");
 const del = require("del");
+const PluginError = require("plugin-error");
 const sass = require("gulp-sass");
 const gulpIf = require("gulp-if");
 const cssnano = require("gulp-cssnano");
+const filter = require("gulp-filter");
 const rename = require("gulp-rename");
 const rsync = require("gulp-rsync");
 const concat = require("gulp-concat");
 const babel = require("gulp-babel");
 const uglify = require("gulp-uglify");
 const optimizejs = require("gulp-optimize-js");
+const debug = require("gulp-debug");
+const through2 = require("through2");
+const request = require("request");
+
+/******** config/setup ***************/
 
 let target = "dev";
+const settings = {
+  buildStaticHtml: true
+};
 const paths = {
   input: "src",
   output: "dist/*",
@@ -29,7 +39,10 @@ const paths = {
   },
   copy: {
     input: "src/site/**/*",
-    output: "dist/"
+    output: "dist/",
+    buildStaticHtml: {
+      server: "http://localhost:8077/"
+    }
   },
   deploy: {
     source: "dist/**",
@@ -50,9 +63,12 @@ const setProdTarget = done => {
   done();
 };
 
+/******** end config/setup ***********/
+
+// Sync files from dist dir to remote server.
 const deploy = done => {
   if (target === "dev") {
-    console.log("Can't deploy to dev.");
+    console.log("Can't deploy to dev. Just run 'gulp' with no args.");
     done();
     return;
   }
@@ -89,17 +105,74 @@ const copyFiles = function(done) {
     .pipe(gulp.dest(paths.copy.output));
 };
 
+// Convert every index.php file to a static index.html.
+// I know this is a silly way to generate a static site.
+// I'm just playing around and learning more about gulp.
+const buildStaticHtml = function(done) {
+  if (!settings.buildStaticHtml) return done();
+
+  const fileFilter = filter(["**/index.php"]);
+  return gulp
+    .src(paths.copy.input)
+    .pipe(fileFilter)
+    .pipe(debug({ title: "convert index.php to static html:" }))
+    .pipe(
+      through2.obj(function(file, _, done) {
+        if (file.isBuffer()) {
+          // Save the php file path. We'll remove it after success.
+          let removeFile = paths.copy.output + file.relative;
+
+          // Convert file path to dev server url.
+          const url =
+            paths.copy.buildStaticHtml.server +
+            file.relative.replace(/index.php$/, "");
+
+          // Fetch the page contents.
+          request(url, (error, response, body) => {
+            if (response.statusCode !== 200) {
+              done(
+                new PluginError(
+                  "buildStaticHtml",
+                  `Error fetching url '${url}' for '${file.relative}': ${error}. (http status=${response.statusCode})`
+                )
+              );
+            }
+            file.contents = Buffer.from(body);
+
+            // remove the php file from the dist dir
+            del.sync([removeFile]);
+
+            done(null, file);
+          });
+        } else {
+          done(
+            new PluginError(
+              "buildStaticHtml",
+              `file is not a buffer? '${file.relative}'`
+            )
+          );
+        }
+      })
+    )
+    .pipe(
+      rename(function(path) {
+        path.extname = ".html";
+      })
+    )
+    .pipe(gulp.dest(paths.copy.output));
+};
+
 // css files
 const buildStyles = () => {
   return gulp
     .src(paths.sass.input)
+    .pipe(debug({ title: "sass file:" }))
     .pipe(sass())
     .pipe(gulpIf("*.css", cssnano()))
     .pipe(gulp.dest(paths.sass.output));
 };
 
 // js files
-
 const buildScripts = () => {
   const isCustom = path => {
     return path.dirname.match(/\/src\/js$/);
@@ -117,6 +190,7 @@ const buildScripts = () => {
 
   return gulp
     .src(paths.js.input)
+    .pipe(debug({ title: "js file:" }))
     .pipe(gulpIf(isCustom, optimizejs()))
     .pipe(
       gulpIf(
@@ -147,18 +221,17 @@ const watchSource = function(done) {
   done();
 };
 
-// Isolated functions, for troubleshooting.
+/******** exported functions *********/
+
 exports.clean = gulp.series(cleanDist);
-exports.copy = gulp.series(copyFiles);
 
 // Default when I just run 'gulp'.
 // (Also the basis of watch and deploy commands.)
 exports.default = gulp.series(
   cleanDist,
-  gulp.parallel(buildStyles, buildScripts, copyFiles)
+  gulp.parallel(buildStyles, buildScripts, copyFiles),
+  buildStaticHtml
 );
-
 exports.watch = gulp.series(exports.default, watchSource);
-
 exports.deployTest = gulp.series(setTestTarget, exports.default, deploy);
 exports.deployProduction = gulp.series(setProdTarget, exports.default, deploy);
