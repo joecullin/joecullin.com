@@ -18,7 +18,7 @@ END_HTML;
 
           <p>
             I live in <a href="https://en.wikipedia.org/wiki/Randolph,_New_Jersey" <?php echo $offsite_attributes?> >Randolph, NJ</a>
-            with my wife & two daughters, and work as a software engineer at <a href="https://www.thomasnet.com/" <?php echo $offsite_attributes?> >Thomas</a>.
+            with my wife & two daughters, and work as a software engineer at <a href="https://getskout.com/" <?php echo $offsite_attributes?> >SKOUT CYBERSECURITY</a>.
           </p>
           <p>
             This site is mainly a sandbox for trying new code & tools, but once in a while I post some

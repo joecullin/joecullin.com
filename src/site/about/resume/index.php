@@ -56,7 +56,24 @@
 
             <div class="resume-job">
               <div class="resume-job__header">
-                Mar 2018&ndash;Present<br/>
+                Feb 2020&ndash;Present<br/>
+                Senior Software Engineer<br/>
+                <a href="https://getskout.com/" <?php echo $offsite_attributes?> >SKOUT CYBERSECURITY</a> - New York, NY
+              </div>
+              <div class="resume-job__details">
+                <p>
+                  Just getting started!
+                </p>
+                <p>
+		  Check back soon for updates.
+                </p>
+
+              </div>
+            </div>
+
+            <div class="resume-job">
+              <div class="resume-job__header">
+                Mar 2018&ndash;Feb 2020<br/>
                 Senior Software Engineer<br/>
                 <a href="https://www.thomasnet.com/" <?php echo $offsite_attributes?> >Thomas</a> - New York, NY
               </div>
