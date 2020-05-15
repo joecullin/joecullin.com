@@ -20,7 +20,7 @@
             <h2>Summary</h2>
 
             <p>
-              Current status: happy where I am. Open to new opportunities.
+              Current status: happy where I am.
             </p>
             <p>
               I've enjoyed roles ranging from senior developer to director of a large multi-office set of teams.

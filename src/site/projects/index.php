@@ -41,11 +41,18 @@ END_HTML;
               <a href="<?php echo $base_url?>/site/2012/10/pallet-wood-projects/" <?php echo $offsite_attributes?> >Adirondack Chair & Flower Boxes</a>
               <a href="<?php echo $base_url?>/site/2012/11/patio-accent-table-made-from-pallet-boards/" <?php echo $offsite_attributes?> >Patio Table</a>
               <a href="<?php echo $base_url?>/site/2013/01/homemade-wooden-coasters/" <?php echo $offsite_attributes?> >Wooden Coasters</a>
-              <span class="note" <?php echo $offsite_attributes?> >Pallet Projects</a>
+              <span class="note" <?php echo $offsite_attributes?> >Pallet projects</a>
             </li>
+            <li>
+              <a href="<?php echo $base_url?>/site/2020/05/wall-mounted-floating-laptop-desk/" <?php echo $offsite_attributes?> >Standup laptop workstation</a>
+              <a href="<?php echo $base_url?>/site/2020/04/standup-laptop-desk-from-a-jack-stand/" <?php echo $offsite_attributes?> >Jackstand desk</a>
+              <a href="<?php echo $base_url?>/site/2015/02/sliding-monitor-mount-for-standing-desk/" <?php echo $offsite_attributes?> >Sliding Wall-Mounted Monitor</a>
+              <span class="note" <?php echo $offsite_attributes?> >Standing desk hacks</a>
+            </li>
+            
+
             <li><a href="<?php echo $base_url?>/site/2015/06/training-myself-to-be-a-back-sleeper/" <?php echo $offsite_attributes?> >Training myself to be a back sleeper</a></li>
             <li><a href="<?php echo $base_url?>/site/2015/02/diy-floating-toy-shelves/" <?php echo $offsite_attributes?> >Floating Toy Shelves</a></li>
-            <li><a href="<?php echo $base_url?>/site/2015/02/sliding-monitor-mount-for-standing-desk/" <?php echo $offsite_attributes?> >Sliding Wall-Mounted Monitor Stand</a></li>
           </ul>
 
           <h2>Other Fun Stuff</h2>
