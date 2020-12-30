@@ -18,8 +18,8 @@ END_HTML;
           <h2>On the Computer</h2>
           <ul>
             <li>
-              <a href="https://github.com/joecullin/aoc2019" <?php echo $offsite_attributes?> >Advent of Code 2019</a>
-              <span class="note">My AOC 2019 solutions.</span>
+              <a href="https://github.com/joecullin/aoc2020" <?php echo $offsite_attributes?> >Advent of Code 2020</a>
+              <span class="note">My AOC 2020 solutions.</span>
             </li>
             <li>
               <a href="https://github.com/joecullin/joecullin.com" <?php echo $offsite_attributes?> >joecullin.com code</a>

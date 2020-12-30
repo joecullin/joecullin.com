@@ -40,6 +40,8 @@ docker pull nimmis/apache-php7
 docker run -d -p 8077:80 -v $code/jc.com/dist/:/var/www/html nimmis/apache-php7
 ```
 
+http://localhost:8077/
+
 I just grabbed a container from https://hub.docker.com/. It's not configured quite the same as prod (for example it ignores .htaccess) but it's good enough for local dev.
 
 ## Deploy
