@@ -43,13 +43,13 @@
 
             <h2>Tech</h2>
 
-            <p><i>Languages</i>: <b>JavaScript, HTML, CSS, PHP, Perl</b>, TypeScript, Sass, Java, C, Bash.</p>
-            <p><i>Frameworks &amp; Platforms</i>: <b>Node.js, Apache, Apollo, jQuery, React, Express</b>, IIS, Nginx.</p>
+            <p><i>Languages</i>: <b>JavaScript, HTML, CSS, Perl, PHP</b>, TypeScript, Sass, Java, C, Bash.</p>
+            <p><i>Frameworks &amp; Platforms</i>: <b>Node.js, React, Express</b>, Apache, Apollo, jQuery, IIS, Nginx.</p>
             <p><i>Operating Systems</i>: <b>Ubuntu, </b>macOS, Windows servers, many other UNIX/linuxes.</p>
-            <p><b><i>Amazon</i></b><i> <b>AWS</b></i>: EC2, S3, RDS, CDK, Route53, DocumentDB, CloudFront, ALB, ELB, Lambda, DynamoDB, ElastiCache, Elasticsearch, WAF.</p>
-            <p><i>Tools</i>: <b>Git, Subversion, Azure DevOps</b>, Gulp, Jenkins, Jira/Confluence, Redmine.</p>
-            <p><i>Databases</i>: <b>MySQL</b>, PostgreSQL, SQL Server, Oracle, MongoDB, Redis.</p>
-            <p><i>Also</i>: <b>GraphQL</b>, Docker, Laravel, Slim, Nuxeo, HubSpot, WordPress, Perforce, Email (low-level content &amp; delivery protocols), AJAX, APIs (Salesforce, Hubspot, Google, Slack, Iterable, etc.), Bootstrap, ImageMagick, VirtualBox, REST, SOAP, OAuth, Swagger.</p>
+            <p><b><i>Amazon</i></b><i> <b>AWS</b></i>: EC2, S3, RDS, Cognito, EKS, CDK, Route53, DocumentDB, CloudFront, ALB, ELB, Lambda, SES, SNS, DynamoDB, ElastiCache, Elasticsearch, WAF.</p>
+            <p><i>Tools</i>: <b>Git, Gitlab, ELK stack, Kubernetes, Azure DevOps</b>, Subversion, Gulp, Jenkins, Jira/Confluence, Redmine.</p>
+            <p><i>Databases</i>: <b>Elasticsearch, MySQL</b>, PostgreSQL, SQL Server, Oracle, MongoDB, Redis.</p>
+            <p><i>Also</i>: <b>GraphQL</b>, Docker, jsreport, Laravel, Slim, Nuxeo, HubSpot, WordPress, Perforce, Email (low-level content &amp; delivery protocols), AJAX, APIs (MS Graph, Zendesk, Salesforce, Hubspot, Google, Slack, Iterable, etc.), Bootstrap, ImageMagick, VirtualBox, REST, SOAP, OAuth, Swagger.</p>
 
 
             <h2>Work Experience</h2>
@@ -62,12 +62,21 @@
               </div>
               <div class="resume-job__details">
                 <p>
-                  Just getting started!
-                </p>
+                  <b>Software Engineering Manager</b>,<i>(Apr 2021&ndash;present)</i>
                 <p>
-		  Check back soon for updates.
-                </p>
+                  <ul class="resume-job__bulleted-list">
+                    <li>Just getting started! Check back soon.</li>
+                  </ul>
 
+                <p>
+                  <b>Senior Software Engineer</b><i>(Feb 2020&ndash;Mar 2021)</i>
+                </p>
+                  <ul class="resume-job__bulleted-list">
+                    <li>Focused primarily on SKOUT's new partner/customer dashboard (React/node), plus some internal apps and data processing pipelines.</li>
+                    <li>Developed several new dashboard screens & features. Highlight: a from-scratch custom report builder, with reports rendered in React, pdf download, and recurring scheduling.</li>
+                    <li>Contributed dozens of visible function & ux improvements, often coupled with underlying security, quality, and maintainability improvements.</li>
+                    <li>Process: introduced CI/CD (gitlab), automated unit testing (Jest), code reviews, stable & predictable deploy routines, bug triage, etc.</li>
+                  </ul>
               </div>
             </div>
 
