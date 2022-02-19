@@ -13,7 +13,7 @@
           </p>
 
           <p>
-            Download a two-page <a href="joe-cullin-resume.pdf">PDF&nbsp;document</a> or read a more-detailed history below.
+            Download a <a href="joe-cullin-resume.pdf" <?php echo $offsite_attributes?> >PDF&nbsp;document</a> or read a more-detailed history below.
           </p>
 
           <div id="resume-detail" class="readable">
@@ -46,10 +46,10 @@
             <p><i>Languages</i>: <b>JavaScript, HTML, CSS, Perl, PHP</b>, TypeScript, Sass, Java, C, Bash.</p>
             <p><i>Frameworks &amp; Platforms</i>: <b>Node.js, React, Express</b>, Apache, Apollo, jQuery, IIS, Nginx.</p>
             <p><i>Operating Systems</i>: <b>Ubuntu, </b>macOS, Windows servers, many other UNIX/linuxes.</p>
-            <p><b><i>Amazon</i></b><i> <b>AWS</b></i>: EC2, S3, RDS, Cognito, EKS, CDK, Route53, DocumentDB, CloudFront, ALB, ELB, Lambda, SES, SNS, DynamoDB, ElastiCache, Elasticsearch, WAF.</p>
+            <p><b><i>Amazon</i></b><i> <b>AWS</b></i>: EC2, S3, RDS, Cognito, EKS, CDK, Route53, DocumentDB, CloudFront, ALB, ELB, Lambda, SES, SNS, DynamoDB, ElastiCache, Elasticsearch, WAF, Secrets Manager.</p>
             <p><i>Tools</i>: <b>Git, Gitlab, ELK stack, Kubernetes, Azure DevOps</b>, Subversion, Gulp, Jenkins, Jira/Confluence, Redmine.</p>
             <p><i>Databases</i>: <b>Elasticsearch, MySQL</b>, PostgreSQL, SQL Server, Oracle, MongoDB, Redis.</p>
-            <p><i>Also</i>: <b>GraphQL</b>, Docker, jsreport, Laravel, Slim, Nuxeo, HubSpot, WordPress, Perforce, Email (low-level content &amp; delivery protocols), AJAX, APIs (MS Graph, Zendesk, Salesforce, Hubspot, Google, Slack, Iterable, etc.), Bootstrap, ImageMagick, VirtualBox, REST, SOAP, OAuth, Swagger.</p>
+            <p><i>Also</i>: Logstash, Kibana, GraphQL, Docker, jsreport, Laravel, Slim, Nuxeo, HubSpot, WordPress, Perforce, Email (low-level content &amp; delivery protocols), AJAX, APIs (MS Graph, Zendesk, Salesforce, Hubspot, Google, Slack, Okta, Duo, Iterable, etc.), Bootstrap, ImageMagick, VirtualBox, SOAP, OAuth, Swagger, Okta.</p>
 
 
             <h2>Work Experience</h2>
@@ -57,19 +57,28 @@
             <div class="resume-job">
               <div class="resume-job__header">
                 Feb 2020&ndash;Present<br/>
-                Senior Software Engineer<br/>
-                <a href="https://getskout.com/" <?php echo $offsite_attributes?> >SKOUT CYBERSECURITY</a> - New York, NY
+                Software Engineering Director<br/>
+                SKOUT CYBERSECURITY / <a href="https://barracudamsp.com/product-details/extended-detection-and-response-xdr/" <?php echo $offsite_attributes?> >Barracuda</a> - Remote
               </div>
               <div class="resume-job__details">
                 <p>
-                  <b>Software Engineering Manager</b>,<i>(Apr 2021&ndash;present)</i>
-                <p>
+                  <b>Software Engineering Director</b>, <i>(Feb 2022&ndash;present)</i>
+                </p>
                   <ul class="resume-job__bulleted-list">
-                    <li>Just getting started! Check back soon.</li>
+                    <li>Led the continued growth of the software engineering team.</li>
+                    <li>Continued integration with other Barracuda teams and platforms.</li>
+                    <li>Expanded our team's responsibility for more apps & systems.</li>
                   </ul>
-
                 <p>
-                  <b>Senior Software Engineer</b><i>(Feb 2020&ndash;Mar 2021)</i>
+                  <b>Software Engineering Manager</b>, <i>(Apr 2021&ndash;Jan 2022)</i>
+                </p>
+                  <ul class="resume-job__bulleted-list">
+                    <li>Led the software engineering team as it expanded from two to seven engineers.</li>
+                    <li>Consolidated and simplified architecture and platform.</li>
+                    <li>Served as scrummaster, running sprints for a 30+ person tech ops team.</li>
+                  </ul>
+                <p>
+                  <b>Senior Software Engineer</b>, <i>(Feb 2020&ndash;Mar 2021)</i>
                 </p>
                   <ul class="resume-job__bulleted-list">
                     <li>Focused primarily on SKOUT's new partner/customer dashboard (React/node), plus some internal apps and data processing pipelines.</li>
