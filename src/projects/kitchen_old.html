@@ -1,0 +1,42 @@
+<HTML>
+ <HEAD>
+  <TITLE>Welcome to joecullin.com!</TITLE>
+ </HEAD>
+<!-- Background white, links blue (unvisited), navy (visited), red (active) -->
+ <BODY
+  BGCOLOR="#FFFFFF"
+  TEXT="#000000"
+  LINK="#0000FF"
+  VLINK="#000080"
+  ALINK="#FF0000"
+ > <font face="Arial, Courier, Sans-serif">
+
+
+<b><u>The Kitchen</u></b><P>
+
+
+<!---
+<a href="/cgi/gallery.pl?GALLERY=kitchen1.txt&NO_PAGING=1">"before" pictures</a>
+<P>
+<a href="/cgi/gallery.pl?GALLERY=kitchen2.txt&NO_PAGING=1">first day of demolition</a>
+--->
+<iframe src="/cgi/gallery.pl?GALLERY=kitchen1.txt&NO_PAGING=1" width=100% height=300></iframe>
+<iframe src="/cgi/gallery.pl?GALLERY=kitchen2.txt&NO_PAGING=1" width=100% height=300></iframe>
+
+
+
+
+<SCRIPT LANGUAGE=JAVASCRIPT>
+function slideshow (gallery)
+{
+   var url = "/cgi/slideshow.pl?GALLERY=" + gallery;
+   var windowName = "babySlideshow";
+   var windowAttributes = "width=600,height=550,scrollbars=yes,resizable=yes,status=no,toolbar=no,navigation=no,left=100,top=100";
+   window.open(url,windowName,windowAttributes);
+}
+</SCRIPT>
+
+
+</font>
+</BODY>
+</HTML>

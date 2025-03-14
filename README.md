@@ -4,53 +4,19 @@ Code for the www.joecullin.com site.
 
 ## Overview
 
-- src/css - sass files
-- src/js - javascript files
-- src/site - php, images, etc. -- copied as-is into the build.
-- dist - target of build
-- package.json file -- for gulp.
+Once in a while I wipe the slate clean and do something totally different.
 
+Sometimes I prioritize ease of maintenance. Other times I do weird things just to learn new tech.
 
-## Dev environment setup
+## Current iteration
 
-Get the code:
-```
-cd $code
-git clone https://github.com/joecullin/joecullin.com.git
-mv joecullin.com jc.com
-```
+Currently this is a fairly boring site with just a few static html files.
 
-Build to `dist` dir:
-```
-cd jc.com
+Some of the site content in a different repo: https://github.com/joecullin/joecullin-content/ . After almost 15 years I got tired of keeping up with WordPress updates, and I thought it would be interesting (and easier) to try exporting it to static html.
 
-pushd src/js
-npm install
-popd
+## Past highlights:
 
-npm install --global gulp-cli
-npm install
-
-gulp
-```
-
-Docker container with php/apache, pointed at `dist` dir:
-```
-docker pull nimmis/apache-php7
-docker run -d -p 8077:80 -v $code/jc.com/dist/:/var/www/html nimmis/apache-php7
-```
-
-http://localhost:8077/
-
-I just grabbed a container from https://hub.docker.com/. It's not configured quite the same as prod (for example it ignores .htaccess) but it's good enough for local dev.
-
-## Deploy
-
-Stage:
-```
-gulp deployTest
-```
-Production:
-```
-gulp deployProduction
-```
+`d8f148d7276656baeb4d91158fa2dd44a713131d` - iteration of the site that used:
+- Docker with Apache for local dev using PHP.
+- Custom gulp plugin to create static HTML files from the PHP.
+- Deploy to staging & prod with gulp.
